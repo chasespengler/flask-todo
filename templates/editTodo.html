@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" id="edit-todo-container">
+    <div class="container" id="edit-header">
+        <h1>Editing '{{ item.title }}'</h1>
+    </div>
+    <div class="container" id="todo-edit-container">
+        <form action="" method="POST">
+            Title: 
+            <br />
+            <input type="text" name="todoTitle" id="todoTitle" value={{item.title}} required />
+            <br />
+            <br />
+            Description: 
+            <br />
+            <textarea name="description" id="description" required>{{item.description}}</textarea>
+            <br />
+            <br />
+            {% if item.completed %}
+                Completed: <input type="checkbox" checked name="completed" id="completed" />
+            {% else %}
+                Completed: <input type="checkbox" name="completed" id="completed" />
+            {% endif %}
+            <br />
+            <br />
+            Due Date: 
+            <br />
+            <input type="datetime-local" value={{date}} name="duedate" id="duedate" required /> 
+            <br />
+            <br />
+            <input class="btn btn-success" type="submit" value="Submit" />      
+        </form>
+    </div>
+    <div class="container" id="edit-page-btns-container">
+        <div id="inner-container">
+            <a href="/delTodo/{{item.id}}/" id="del-todo-btn-link" class="btn btn-danger edit-btns">
+                <div id="del-todo-btn">
+                    Delete Item
+                </div>
+            </a>
+            <a href="/mytodos/" id="cancel-edit-btn-link" class="btn btn-primary">
+                <div id="cancel-todo-btn">
+                    Cancel
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

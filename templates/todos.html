@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" id="todo-page-container">
+        <div id="todo-header">
+            <h1>TODOS</h1>
+            <a href="/logout/" class="btn btn-primary" id="logout-btn">
+                Log Out
+            </a>
+        </div>
+        <div id="create-todo-title">
+            <h4>Create a to-do item!</h4>
+        </div>
+        <div id="create-todo-container">
+            <form action="" method="POST">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 in-row">
+                            Title: 
+                            <br />
+                            <input type="text" name="todoTitle" id="todoTitle" default="Title" required />
+                        </div>
+                        <div class="col-lg-6 in-row">
+                            Description:
+                            <br />
+                            <textarea name="description" id="description" required></textarea>
+                        </div>
+                        <div class="col-lg-6 in-row">
+                            Completed: <input type="checkbox" name="completed" id="completed" />
+                        </div>
+                        <div class="col-lg-6 in-row">
+                            Due Date:
+                            <br />
+                            <input type="datetime-local" name="duedate" id="duedate" required />
+                        </div>
+                        <div class="col-lg-12 text-center" id="submit-todo">
+                            <input class="btn btn-success" type="submit" value="Add Item" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="todos-container" class="container">
+            <div class="row" id="todo-titles-row">
+                <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                    Title
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                    Description
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                    Due Date
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                    Completed
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                    Edit Item
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                    Move Item
+                </div>
+            </div>
+            {% for todo in todos %}
+                <div class="row todo-row">
+                    <div class="todo-column col-lg-2 col-md-4 col-sm-6 col-xs-12 todo-title">
+                        {{ todo.title }}
+                    </div>
+                    <div class="todo-column col-lg-2 col-md-4 col-sm-6 col-xs-12 todo-desc">
+                        {{ todo.description }}
+                    </div>
+                    <div class="todo-column col-lg-2 col-md-4 col-sm-6 col-xs-12 todo-duedate">
+                        {{ todo.due_date }}
+                    </div>
+                    <div class="todo-column col-lg-2 col-md-4 col-sm-6 col-xs-12 todo-completed">
+                        {% if todo.completed %}
+                        <a href="/completeTodo/{{todo.id}}/" id="complete-todo-btn-link" class="btn btn-success">
+                            <div id="complete-todo-btn">
+                                Complete
+                            </div>
+                        </a>
+                        {% else %}
+                            <a href="/completeTodo/{{todo.id}}/" id="complete-todo-btn-link" class="btn btn-danger">
+                                <div id="complete-todo-btn">
+                                    Not Complete
+                                </div>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div id="edit-btn-container" class="todo-column col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                        <a href="/editTodo/{{todo.id}}/" id="edit-todo-btn-link" class="btn btn-primary">
+                            <div id="edit-todo-btn">
+                                Edit Item
+                            </div>
+                        </a>
+                    </div>
+                    <div id="change-order" class="todo-column col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                        <a href="/moveTodo/{{todo.id}}/up/" id="up-order-todo-btn-link" class="btn btn-info">
+                            <div id="up-order-todo-btn">
+                                &#8593;
+                            </div>
+                        </a>
+                        <a href="/moveTodo/{{todo.id}}/down/" id="down-order-todo-btn-link" class="btn btn-warning">
+                            <div id="down-order-todo-btn">
+                                &#8595;
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

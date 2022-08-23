@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" id="login-container">
+        <div id="login-header">
+            <h1>Login</h1>
+        </div>
+        <div>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == 'error' %}
+                        <div style="opacity: 0.5;" class="alert alert-danger alert-dismissible show" role="alert" id="failure-msg">
+                            {{ message }}
+                        <button style="color: black;" type="button" class="btn-close" onclick="failure()">&#10005;</button>
+                        </div>
+                        {% else %}
+                        <div style="opacity: 0.5;" class="alert alert-success alert-dismissible show" role="alert" id="success-msg">
+                            {{ message }}
+                        <button style="color: black;" type="button" class="btn-close" onclick="success()">&#10005;</button>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div id="login-form-container" class="container">
+            <form action="" method="POST">
+                Email: <input type="text" name="email" id="email" default="Email" required=True />
+                Password: <input type="password" name="password" id="password" required=True />
+                <br />
+                <br />
+                <input class="btn btn-success" style="color: black" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+    <script>
+        var successdiv = document.getElementById('success-msg');
+        var failurediv = document.getElementById('failure-msg');
+
+        function success() {
+            successdiv.style.opacity = 0;
+        };
+        function failure() {
+            failurediv.style.opacity = 0;
+        }
+    </script>
+{% endblock %}

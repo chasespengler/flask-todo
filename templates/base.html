@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>  
+      <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+      <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+      <script href="{{url_for('static', filename='js/main.js')}}"></script>
+    </head>
+    <body>
+        <nav class="navbar">
+            <a class="navbar-brand" href="/">ToDo</a>
+            <div id="nav-items-container">
+              <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/mytodos/">My ToDo's</a>
+              </div>
+            </div>
+          </nav>
+        <div id="content-container">
+          {% block content %}
+          {% endblock %}
+        </div>
+        <div class="footer">
+          <div class="container" id="footer-container">
+            Product built by Chase Spengler
+          </div>
+        </div>
+    </body>
+</html>
